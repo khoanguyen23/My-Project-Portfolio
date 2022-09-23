@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/blog.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/95c2c2f254.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&family=Source+Code+Pro:wght@200;300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:400,900,900i" rel="stylesheet">
+<link rel="stylesheet" href="styles/blog.css">
+</head>
+<body>
+    
+    <section class="header">
+        <nav>
+            <a href=""><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" alt="logo"></a>
+            <div class="navBar">
+            <!-- <ul>
+                <li><a href="">home</a></li>
+                <li><a href="">about</a></li>
+                <li><a href="">portfolio</a></li>
+                <li><a href="">blogs</a></li>
+                <li><a href="">contact</a></li>
+            </ul> -->
+                <a href="">home</a>
+                <a href="">about</a>
+                <a href="">portfolio</a>
+                <a href="">blogs</a>
+                <a href="">contact</a>
+            </div>
+        </nav>
+    </section>
+    <article>
+        
+        <section class="tutorial-header">
+             <div class="main-media">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/lDukIAymutM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+             <div class="meta-tutorials">
+                <h1>React: useTransition() vs useDeferredValue()</h1>
+                <p>
+                React 18 introduced the Concurrency concept and with it two new Hooks: useTransition() and useDeferredValue(). Understanding when to use which can be tricky though.
+                </p>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <div class="meta-icon">
+                            <i class="fa-solid fa-user"></i>
+                            Created by Maximilian Schwarzmüller
+                        </div>
+                    </div>
+                    <div class="meta-item time">
+                        <div class="meta-icon">
+                            <i class="fa-solid fa-clock"></i>
+                            March 28, 2022  
+                        </div>              
+                    </div>
+                </div>
+                <p class="button-tutorial">
+                    
+                    <a href="https://www.youtube.com/watch?v=lDukIAymutM"><i class="fa-solid fa-video"></i>Watch Tutorial Video</a>
+                </p>
+            </div>        
+        </section>
+        <!-- <section class="content"> -->
+            <div class="content-wrapper">
+                <div class="container-content">
+                    <div class="content-item">
+                        <h1>
+                            <a style="text-decoration:none" href="#react-18-concurrency" class="anchored-headline_anchor__4qPyS">#</a>
+                            React 18 & Concurrency
+                        </h1>
+                        <p>
+                            Before diving into this article, you should definitely go through my React 18 update video and the official React 18 release blog post.
+                        </p>
+                        <p>
+                            Because React 18 introduced a key new concept: Concurrency. And concurrency is all about performing multiple state updates at once. Or, to be precise, it's all about prioritizing certain state updates over others, so that the overall user interface can be kept responsive.
+                        </p>
+                    </div>
+                    <div class="content-item">
+                        <h1>
+                            <a style="text-decoration:none" href="#react-18-concurrency" class="anchored-headline_anchor__4qPyS">#</a>
+                            useTransition() and useDeferredValue()
+                        </h1>
+                        <p>
+                            I created a complete video tutorial where I explain when concurrency matters. In that video, I also show how <code>useTransition()</code> and <code>useDeferredValue()</code> can be used to give React hints about the importance of state updates and what the difference between these two hooks is. I also provide a small demo app.
+                        </p>
+                        <p>
+                            Here's the very short summary:
+                        </p>
+                    </div>
+                    <div class="content-item">
+                        <h1>
+                            <a style="text-decoration:none" href="#react-18-concurrency" class="anchored-headline_anchor__4qPyS">#</a>
+                            useTransition() in Action
+                        </h1>
+                        <p>
+                            <code>useTransition()</code> can be used to tell React that certain state updates have a lower priority (i.e., all other state updates or UI rendering triggers have a higher priority).
+                        </p>
+                        <p>
+                            When calling <code>useTransition()</code>, you get back an array with exactly two elements: An isPending boolean value, telling you whether the low-priority state update is still pending, and a <code>startTransition()</code> function that can be wrapped around a state update to tell React, that it is a low-priority update.
+                        </p>
+                        <p>
+                            Here's how the <code>useTransition()</code> hook could be used:
+                        </p>  
+                        <pre><pre style="display:block;overflow-x:auto;padding:0.5em;background:#011627;color:#d6deeb;class-name:code-block_codeblock__E0Rga"><code class="language-jsx" style="white-space:pre"><span style="color:#c792ea;font-style:italic">function</span><span style="color:#82AAFF"> </span><span style="color:#DCDCAA;font-style:italic">App</span><span style="color:#82AAFF">(</span><span style="color:#82AAFF">) </span><span>{
+                        </span><span>  </span><span style="color:#c792ea;font-style:italic">const</span><span> [isPending, startTransition] = useTransition();
+                        </span><span>  </span><span style="color:#c792ea;font-style:italic">const</span><span> [filterTerm, setFilterTerm] = useState(</span><span style="color:#ecc48d">''</span><span>);
+                        </span>
+                        <span>  </span><span style="color:#c792ea;font-style:italic">const</span><span> filteredProducts = filterProducts(filterTerm);
+                        </span>
+                        <span>  </span><span style="color:#c792ea;font-style:italic">function</span><span style="color:#82AAFF"> </span><span style="color:#DCDCAA;font-style:italic">updateFilterHandler</span><span style="color:#82AAFF">(</span><span style="color:#7fdbca">event</span><span style="color:#82AAFF">) </span><span>{
+                        </span><span>    startTransition(</span><span style="color:#82AAFF">() =&gt;</span><span> {
+                        </span>      setFilterTerm(event.target.value);
+                        <!-- -->    });
+                        <!-- -->  }
+                        <!-- -->
+                        <span>  </span><span style="color:#c792ea;font-style:italic">return</span><span> (
+                        </span><span>    </span><span class="xml" style="color:#7fdbca">&lt;</span><span class="xml" style="color:#7fdbca">div</span><span class="xml" style="color:#7fdbca"> </span><span class="xml" style="color:#7fdbca">id</span><span class="xml" style="color:#7fdbca">=</span><span class="xml" style="color:#ecc48d">"app"</span><span class="xml" style="color:#7fdbca">&gt;</span><span class="xml">
+                        </span><span class="xml">      </span><span class="xml" style="color:#7fdbca">&lt;</span><span class="xml" style="color:#7fdbca">input</span><span class="xml" style="color:#7fdbca"> </span><span class="xml" style="color:#7fdbca">type</span><span class="xml" style="color:#7fdbca">=</span><span class="xml" style="color:#ecc48d">"text"</span><span class="xml" style="color:#7fdbca"> </span><span class="xml" style="color:#7fdbca">onChange</span><span class="xml" style="color:#7fdbca">=</span><span class="xml" style="color:#ecc48d">{updateFilterHandler}</span><span class="xml" style="color:#7fdbca"> /&gt;</span><span class="xml">
+                        </span><span class="xml">      {isPending &amp;&amp; </span><span class="xml" style="color:#7fdbca">&lt;</span><span class="xml" style="color:#7fdbca">p</span><span class="xml" style="color:#7fdbca">&gt;</span><span class="xml">Updating List...</span><span class="xml" style="color:#7fdbca">&lt;/</span><span class="xml" style="color:#7fdbca">p</span><span class="xml" style="color:#7fdbca">&gt;</span><span class="xml">}
+                        </span><span class="xml">      </span><span class="xml" style="color:#7fdbca">&lt;</span><span class="xml" style="color:#7fdbca">ProductList</span><span class="xml" style="color:#7fdbca"> </span><span class="xml" style="color:#7fdbca">products</span><span class="xml" style="color:#7fdbca">=</span><span class="xml" style="color:#ecc48d">{filteredProducts}</span><span class="xml" style="color:#7fdbca"> /&gt;</span><span class="xml">
+                        </span><span class="xml">    </span><span class="xml" style="color:#7fdbca">&lt;/</span><span class="xml" style="color:#7fdbca">div</span><span class="xml" style="color:#7fdbca">&gt;</span><span>
+                        </span>  );
+                        <!-- -->}</code></pre></pre>
+                        <p>
+                            This example is taken from the video mentioned before.
+                        </p>
+                        <p>
+                            The <code>setFilterTerm()</code> state updating function is wrapped by <code>startTransition()</code> and therefore React treats this state updating code with a lower priority. In the demo, this means that the input field stays responsive and react instantly to keystrokes. Without the use of useTransition() the app can get unresponsive, especially on slower devices.
+                        </p>
+                    </div>
+                    <div class="content-item">
+                        <h1>
+                            <a style="text-decoration:none" href="#react-18-concurrency" class="anchored-headline_anchor__4qPyS">#</a>
+                            useDeferredValue() in Action
+                        </h1>
+                        <p>
+                            <code>useTransition()</code> gives you full control since you decide which code should be wrapped and treated as "low priority". Sometimes though, you might not have access to the actual state updating code (e.g., because it's performed by some third-party library). Or, for some reason, you can't use <code>useTransition()</code>.
+                        </p>
+                        <p>
+                            In such cases, you could use useDeferredValue() instead.
+                        </p>
+                        <p>
+                            With useDeferredValue(), you don't wrap the state updating code but instead the value that's in the end generated or changed because of the state update (either the state value itself or some value that's computed based on the state value, as in the demo app shown in the video).
+                        </p>
+                        <p>
+                            A basic example could look like this:
+                        </p>
+                        <pre><pre style="display:block;overflow-x:auto;padding:0.5em;background:#011627;color:#d6deeb;class-name:code-block_codeblock__E0Rga"><code class="language-jsx" style="white-space:pre"><span>function ProductList({ products }) {
+                        </span><span>  const deferredProducts = useDeferredValue(</span><span style="color:#7fdbca">products</span><span>)</span><span style="color:#637777;font-style:italic">;</span><span>
+                        </span>  return (
+                        <!-- -->    &lt;ul&gt;
+                        <span>      {deferredProducts.map((</span><span style="color:#7fdbca">product</span><span>) =&gt; (
+                        </span>        &lt;li&gt;{product}&lt;/li&gt;
+                        <!-- -->      ))}
+                        <!-- -->    &lt;/ul&gt;
+                        <span>  )</span><span style="color:#637777;font-style:italic">;</span><span>
+                        </span>}</code></pre></pre>
+                        <p>
+                            Here, useDeferredValue() is used to wrap products. As a result, React will perform other state or UI updates with a higher priority than updates related to the products value.
+                        </p>
+                    </div>
+                    <div class="content-item">
+                        <h1>
+                            <a style="text-decoration:none" href="#react-18-concurrency" class="anchored-headline_anchor__4qPyS">#</a>
+                            When Should You Use Which?
+                        </h1>
+                        <p>
+                            As mentioned above, the difference is that <code>useTransition()</code> wraps the state updating code, whilst useDeferredValue() wraps a value that's affected by the state update. You don't need to (and shouldn't) use both together, since they achieve the same goal in the end.
+                        </p>
+                        <p>
+                            Instead, it makes sense to prefer <code>useTransition()</code>, if you have some state update that should be treated with a lower priority and you have access to the state updating code. If you don't have that access, use useDeferredValue().
+                        </p>
+                    </div>
+                    <div class="content-item">
+                        <h1>
+                            <a style="text-decoration:none" href="#react-18-concurrency" class="anchored-headline_anchor__4qPyS">#</a>
+                            Don't Overdo It!
+                        </h1>
+                        <p>
+                            Very important: You should not start wrapping all your state updates with <code>useTransition()</code> or all your values with useDeferredValue(). Those hooks should be used if you have a complex user interface or component that can't be optimized with other means. You should always keep other performance improvements like lazy loading, pagination or performing work in worker threads or on the backend in mind.
+                        </p>
+                        
+                    </div>
+                </div>
+                <section class="suggestion">
+                    <h2>
+                        Related Premium Courses   
+                    </h2>
+                    <ul>
+                        <li>
+                            
+                                <a href="https://www.udemy.com/course/react-the-complete-guide-incl-redux/?couponCode=D_0922" class="sgt">
+                                    <img src="https://res.cloudinary.com/academind-gmbh/image/upload/f_auto,q_auto:eco/dpr_2.0,w_100,c_limit,g_center/v1/academind.com/content/courses/react-complete-guide/react-course-the-complete-guide" alt="">
+                                    <div class="guide_suggest">
+                                        <h3>
+                                            React - The Complete Guide
+                                        </h3>
+                                        <p>
+                                            Learn React.js, Hooks, Redux, React Routing, Animations, Next.js basics and way more! The course is up-to-date with the latest version of React.
+                                        </p>
+                                    </div>
+                                </a>
+                            
+                        </li>
+                    </ul>
+
+                </section>
+            </div>
+        <!-- </section> -->
+    </article>
+    <footer class="main_footer">
+        <a href="" class="btn-left">
+            Impressum & Datenschutz (DE)
+        </a>
+        <span class="divider">|</span>
+        <a href="" class="btn-right">
+            Imprint & Data Privacy (EN)
+        </a>
+    </footer>
+   
+    <script src="backTotheTop.js"></script>
+</body>
+</html>
