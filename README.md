@@ -34,4 +34,4 @@
     $ npm run build 
 
 # Link demo :
-https://khoanguyen23.github.io/My-Portfolio/
+https://khoanguyen23.github.io/My-Project-Portfolio/
